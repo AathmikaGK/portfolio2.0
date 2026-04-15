@@ -4,13 +4,13 @@ import { motion } from "framer-motion";
 export default function Volunteering() {
   const cards = [
     {
-      img: "https://lh3.googleusercontent.com/aida-public/AB6AXuDsTK0REhEqaBf2alw3Q0vuKX9L9msysqOR7qHXLz1yNEpUvX9sn45VaHpwJZ2iTYM30domvo3mPG6Bny8Utjvah0XVxCQCeK9QdIMTowzXECa_t6QyhFExfjNSJWA3LdhbmzA3i_6wp8nklNmt5qVvJ04nqP-bHsz3oehkdD1-6a2Kj4O8aYyIoZsOz1v12tDlms1O_fIB9hUPoOsmFGmy2LOIJAUP92prV37QjIolAzrmFgT2nd5OBHHTKmEPYJToSdMHI1AoUFE",
+      img: "/volunteering/qut-connect.png",
       title: "QUT Connector",
       desc: "Mentoring underprivileged youth in basic Python and web development fundamentals.",
       startX: -50
     },
     {
-      img: "https://lh3.googleusercontent.com/aida-public/AB6AXuDhlJp6et0lioJkuS8p0CaZxs2b_pcLzxAKSc9Z9Quu8tRlsHJ3ytzanOG-JuaCxBsIhhrJEbHZjCGqhqUwfM_9RSv4dEEar4TmCeDNtVB9uLUrdNpbnVXKEO7o5b_yfhW_3qFoDBWeQozHXG6d8cGUzLwaZ8Zrn-C_4dVw6lAhQSeSuBmgo494mtONbqXw0NTe13CaaJm34EPtiP1Jjgf7-TgBiZTm_TCmdakMzFgN3gcapffMA7vtc9yJJJVjbeBcC1vcyUgODAA",
+      img: "/volunteering/qut-guild.png",
       title: "QUT Guild Volunteer",
       desc: "Building open-source sensors for local parks to monitor soil moisture and health via IoT.",
       startX: 50
@@ -51,8 +51,8 @@ export default function Volunteering() {
               }}
               className="cursor-hover flex flex-col md:flex-row glass-card rounded-xl overflow-hidden"
             >
-              <div className="md:w-1/3">
-                <img alt={card.title} className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500" src={card.img} />
+              <div className="md:w-1/3 bg-surface-container-highest flex items-center justify-center p-4">
+                <img alt={card.title} className="w-full h-full object-contain transition-all duration-500" src={card.img} />
               </div>
               <div className="p-8 md:w-2/3">
                 <h4 className="text-lg font-bold text-tertiary mb-2">{card.title}</h4>
