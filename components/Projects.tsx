@@ -13,17 +13,6 @@ type Project = {
 
 const projects: Project[] = [
   {
-    title: "Video & Audio Transcoder API",
-    tag: "AWS / Python",
-    problem: "Large media files are slow and hard to process at scale.",
-    highlights: [
-      "Cloud-native system converting uploads up to 500 MB into MP3/AAC/OGG in <30 seconds",
-      "Scalable architecture with ECS + SQS, secured via Cognito JWT + IAM",
-    ],
-    tech: "Python · FastAPI · FFmpeg · AWS (S3, EC2, ECS, SQS, Route 53, IAM, CloudWatch, API Gateway, Cognito)",
-    github: "https://github.com/AathmikaGK/video_audio_transcoder.git",
-  },
-  {
     title: "AI Planner & Learning Assistant",
     tag: "RAG / LangChain",
     problem: "Students struggle to extract answers from long study materials.",
@@ -33,6 +22,17 @@ const projects: Project[] = [
     ],
     tech: "TypeScript · Python · FastAPI · LangChain · RAG · Supabase · Vercel · Docker · Railway",
     github: "https://github.com/AathmikaGK/ai-planner-and-learning-assistant.git",
+  },
+  {
+    title: "Video & Audio Transcoder API",
+    tag: "AWS / Python",
+    problem: "Large media files are slow and hard to process at scale.",
+    highlights: [
+      "Cloud-native system converting uploads up to 500 MB into MP3/AAC/OGG in <30 seconds",
+      "Scalable architecture with ECS + SQS, secured via Cognito JWT + IAM",
+    ],
+    tech: "Python · FastAPI · FFmpeg · AWS (S3, EC2, ECS, SQS, Route 53, IAM, CloudWatch, API Gateway, Cognito)",
+    github: "https://github.com/AathmikaGK/video_audio_transcoder.git",
   },
   {
     title: "AI Quiz Master",
