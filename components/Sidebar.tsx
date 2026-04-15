@@ -23,10 +23,11 @@ export default function Sidebar() {
   }, []);
 
   const navLinks = [
-    { id: "home", href: "#home", icon: "terminal", label: "ABOUT ME" },
-    { id: "tech", href: "#tech", icon: "biotech", label: "PROJECTS" },
-    { id: "projects", href: "#projects", icon: "folder_open", label: "experience" },
-    { id: "connect", href: "#connect", icon: "alternate_email", label: "CONTACT ME" },
+    { id: "home", href: "#home", label: "ABOUT ME" },
+    { id: "projects", href: "#projects", label: "MY WORK" },
+    { id: "hackathons", href: "#hackathons", label: "HACKATHONS" },
+    { id: "volunteering", href: "#volunteering", label: "VOLUNTEERING" },
+    { id: "connect", href: "#connect", label: "CONTACT ME" },
   ];
 
   return (
