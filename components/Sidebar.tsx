@@ -30,19 +30,16 @@ export default function Sidebar() {
   ];
 
   return (
-    <aside className="bg-stone-950 text-orange-400 font-bold tracking-tight Inter labels-mono-space-grotesk fixed left-0 top-0 h-[1024px] w-64 hidden md:flex flex-col p-8 gap-8 border-r border-white/5" data-stitch-vh="h-[1024px]===h-screen">
-      <motion.div 
+    <aside className="bg-surface-container-lowest text-primary font-bold tracking-tight Inter fixed left-0 top-0 h-[1024px] w-64 hidden md:flex flex-col p-8 gap-8 border-r border-outline-variant/30 transition-colors duration-300">
+      <motion.div
         className="flex items-center gap-3 cursor-hover"
         initial={{ x: -30, opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
         transition={{ delay: 0.3, duration: 0.5 }}
       >
-        <div className="w-10 h-10 rounded-full bg-surface-container overflow-hidden">
-          <img alt="Engineer portrait" className="w-full h-full object-cover" data-alt="professional portrait of a software engineer with soft dramatic lighting and dark background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCK27zWII50ErFl_b_bTfb6xVl7thId2dTBAnNQOdqis-3IAahvQWU4YaxnBNRja0HgneWsQToMbE08Br9JZ11wC-Mq9VPvQUj9CAl42ZCvxXHLWtrjimhg0GUlnQ8rceGrqtqrdsnK9x1HEv_mNH18qrHeoZxsrNLosDUxSfuGfR6rOEzQlRKbwkvMuBCmPi1SKmmVMMWKPLflKZETMFk78rvfxr5zdJru_sDTU05rSlwgCLG39jn8nUfm7yyVPVg8C9izK2CuxwM" />
-        </div>
         <div>
-          <h2 className="text-stone-50 font-black text-sm leading-tight">Aathmika Gokula Krishna</h2>
-          <p className="text-stone-500 text-[10px] uppercase tracking-widest">ASPIRING Software DEVELOPER</p>
+          <h2 className="text-tertiary font-black text-sm leading-tight">Aathmika Gokula Krishna</h2>
+          <p className="text-on-surface-variant text-[10px] uppercase tracking-widest">ASPIRING Software DEVELOPER</p>
         </div>
       </motion.div>
 
@@ -54,7 +51,9 @@ export default function Sidebar() {
               key={link.id}
               href={link.href}
               className={`relative flex items-center gap-4 py-3 px-4 rounded-xl font-bold transition-all duration-300 cursor-hover border-r-2 ${
-                isActive ? "text-white border-orange-400" : "text-stone-500 hover:text-stone-200 hover:bg-stone-900 border-transparent"
+                isActive
+                  ? "text-tertiary border-primary"
+                  : "text-on-surface-variant hover:text-tertiary hover:bg-surface-container border-transparent"
               }`}
               animate={{ scale: isActive ? 1.05 : 1 }}
               whileHover="hover"
@@ -66,7 +65,6 @@ export default function Sidebar() {
                   transition={{ type: "spring", stiffness: 300, damping: 30 }}
                 />
               )}
-              <span className="material-symbols-outlined relative z-10" data-icon={link.icon}>{link.icon}</span>
               <span className="font-label text-xs uppercase tracking-widest relative z-10 overflow-hidden">
                 {link.label}
                 <motion.span
@@ -82,9 +80,9 @@ export default function Sidebar() {
           );
         })}
       </nav>
-      
+
       <div className="mt-auto cursor-hover">
-        <p className="text-stone-600 font-mono text-[10px] tracking-widest uppercase">v2.4.0</p>
+        <p className="text-on-surface-variant/60 font-mono text-[10px] tracking-widest uppercase">v2.4.0</p>
       </div>
     </aside>
   );
