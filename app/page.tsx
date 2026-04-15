@@ -2,6 +2,7 @@ import Sidebar from "@/components/Sidebar";
 import Hero from "@/components/Hero";
 import TechStack from "@/components/TechStack";
 import Projects from "@/components/Projects";
+import Hackathons from "@/components/Hackathons";
 import WorkExperience from "@/components/WorkExperience";
 import Volunteering from "@/components/Volunteering";
 import Quote from "@/components/Quote";
@@ -21,6 +22,7 @@ export default function Home() {
         <Hero />
         <TechStack />
         <Projects />
+        <Hackathons />
         <WorkExperience />
         <Volunteering />
         <Quote />
