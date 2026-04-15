@@ -18,7 +18,7 @@ export default function RootLayout({
       <head>
         <style>{`* { cursor: none !important; }`}</style>
       </head>
-      <body className="selection:bg-primary-container selection:text-on-primary-container bg-background text-on-background">
+      <body suppressHydrationWarning className="selection:bg-primary-container selection:text-on-primary-container bg-background text-on-background">
         <div className="grain-overlay"></div>
         <SmoothScroll>
           <CustomCursor />
