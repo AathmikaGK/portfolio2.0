@@ -1,0 +1,72 @@
+import type { Config } from "tailwindcss";
+
+const config: Config = {
+  content: [
+    "./components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./app/**/*.{js,ts,jsx,tsx,mdx}",
+  ],
+  darkMode: "class",
+  theme: {
+    extend: {
+      colors: {
+        "primary-container": "#e58958",
+        "surface-dim": "#0e0e0e",
+        "outline-variant": "#484847",
+        "tertiary-fixed-dim": "#f3f0eb",
+        "on-error-container": "#ffd2c8",
+        "on-tertiary-fixed-variant": "#6e6d69",
+        "surface-container-highest": "#262626",
+        "on-tertiary-fixed": "#51504d",
+        "on-secondary-fixed-variant": "#972800",
+        "on-tertiary": "#605f5b",
+        "secondary": "#ff7348",
+        "on-primary-container": "#3f1600",
+        "secondary-fixed": "#ffc4b3",
+        "surface-container": "#1a1919",
+        "outline": "#767575",
+        "primary-fixed": "#f59663",
+        "error": "#ff7351",
+        "on-tertiary-container": "#575753",
+        "tertiary": "#fcf9f4",
+        "secondary-dim": "#ff7348",
+        "surface-tint": "#f59663",
+        "surface-bright": "#2c2c2c",
+        "on-primary-fixed-variant": "#602600",
+        "on-surface-variant": "#adaaaa",
+        "on-primary": "#521f00",
+        "tertiary-container": "#eeebe6",
+        "surface-container-low": "#131313",
+        "on-secondary-fixed": "#651800",
+        "secondary-container": "#a12e05",
+        "primary": "#f59663",
+        "inverse-primary": "#954a1e",
+        "on-secondary-container": "#ffe6df",
+        "surface": "#0e0e0e",
+        "on-surface": "#ffffff",
+        "on-secondary": "#420d00",
+        "error-dim": "#d53d18",
+        "inverse-surface": "#fcf9f8",
+        "secondary-fixed-dim": "#ffb19a",
+        "tertiary-dim": "#eeebe6",
+        "surface-container-lowest": "#000000",
+        "surface-variant": "#262626",
+        "on-error": "#450900",
+        "error-container": "#b92902",
+        "background": "#0e0e0e",
+        "surface-container-high": "#201f1f",
+        "on-background": "#ffffff",
+        "primary-fixed-dim": "#e58958",
+        "tertiary-fixed": "#ffffff",
+        "primary-dim": "#e58958",
+        "inverse-on-surface": "#565555"
+      },
+      fontFamily: {
+        headline: ["Inter", "sans-serif"],
+        body: ["Inter", "sans-serif"],
+        label: ["Space Grotesk", "sans-serif"]
+      }
+    },
+  },
+  plugins: [],
+};
+export default config;
