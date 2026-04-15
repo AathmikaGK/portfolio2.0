@@ -5,7 +5,10 @@ import { motion } from "framer-motion";
 export default function Hero() {
   const [taglineText, setTaglineText] = useState("");
   const fullTagline = "Software Engineering Student & AI Specialist | Building Scalable RAG & Cloud-Native Solutions that Bridge the Gap Between Complex Data and User Experience. ";
-  const nameWords = ["Aathmika ", "Gokula Krishna "];
+  const nameWords = [
+    { text: "Aathmika", accent: true },
+    { text: "Gokula Krishna", accent: false },
+  ];
 
   useEffect(() => {
     const timeoutId = setTimeout(() => {
@@ -39,18 +42,41 @@ export default function Hero() {
           Building real systems
         </motion.span>
         
-        <h1 className="text-6xl md:text-8xl font-black text-tertiary leading-[0.9] tracking-tighter flex flex-wrap">
-          {nameWords.map((word, i) => (
-            <motion.span
-              key={i}
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.08, duration: 0.5 }}
-              style={i === 0 ? { color: "rgb(245, 150, 99)", fontStyle: "italic", fontSize: "6rem", letterSpacing: "-0.05em" } : {}}
-            >
-              {word}
-            </motion.span>
-          ))}
+        <h1 className="text-6xl md:text-8xl font-black text-tertiary leading-[0.9] tracking-tighter flex flex-wrap gap-x-4">
+          {nameWords.map((word, wi) => {
+            const chars = word.text.split("");
+            const priorChars = nameWords
+              .slice(0, wi)
+              .reduce((acc, w) => acc + w.text.length, 0);
+            return (
+              <span key={wi} className="inline-flex overflow-hidden pb-2">
+                {chars.map((char, ci) => (
+                  <motion.span
+                    key={ci}
+                    initial={{ y: "110%", opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{
+                      delay: (priorChars + ci) * 0.045,
+                      duration: 0.7,
+                      ease: [0.22, 1, 0.36, 1],
+                    }}
+                    style={
+                      word.accent
+                        ? {
+                            color: "rgb(245, 150, 99)",
+                            fontStyle: "italic",
+                            letterSpacing: "-0.05em",
+                            display: "inline-block",
+                          }
+                        : { display: "inline-block" }
+                    }
+                  >
+                    {char === " " ? "\u00A0" : char}
+                  </motion.span>
+                ))}
+              </span>
+            );
+          })}
         </h1>
 
         <motion.p 
