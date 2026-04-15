@@ -1,6 +1,6 @@
 "use client";
-import { motion } from "framer-motion";
-import { useRef, MouseEvent, CSSProperties } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { useRef, useState, useEffect, MouseEvent, CSSProperties } from "react";
 
 type Hackathon = {
   title: string;
@@ -10,6 +10,7 @@ type Hackathon = {
   highlights: string[];
   tech: string;
   github: string;
+  award?: string;
 };
 
 const hackathons: Hackathon[] = [
@@ -25,6 +26,7 @@ const hackathons: Hackathon[] = [
     ],
     tech: "Node.js · Supabase · OpenAI API · JWT Auth · Vercel",
     github: "https://github.com/AathmikaGK/LittleWins.git",
+    award: "/awards/best-pitch.png",
   },
   {
     title: "Safeguard AI",
@@ -47,7 +49,21 @@ function GitHubIcon() {
   );
 }
 
-function HackathonCard({ item }: { item: Hackathon }) {
+function TrophyIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4" aria-hidden="true">
+      <path d="M7 3h10v2h3a1 1 0 0 1 1 1v3a4 4 0 0 1-4 4h-.2a6 6 0 0 1-3.8 3.92V19h3v2H8v-2h3v-2.08A6 6 0 0 1 7.2 13H7a4 4 0 0 1-4-4V6a1 1 0 0 1 1-1h3V3Zm0 4H5v2a2 2 0 0 0 2 2V7Zm10 4a2 2 0 0 0 2-2V7h-2v4Z" />
+    </svg>
+  );
+}
+
+function HackathonCard({
+  item,
+  onAwardClick,
+}: {
+  item: Hackathon;
+  onAwardClick: (src: string, title: string) => void;
+}) {
   const cardRef = useRef<HTMLDivElement>(null);
   const rafRef = useRef<number | null>(null);
   const latest = useRef({ x: 0, y: 0 });
@@ -117,23 +133,101 @@ function HackathonCard({ item }: { item: Hackathon }) {
           <span className="text-primary uppercase tracking-widest">Tech: </span>
           {item.tech}
         </p>
-        <motion.a
-          href={item.github}
-          target="_blank"
-          rel="noopener noreferrer"
-          whileHover={{ scale: 1.04 }}
-          whileTap={{ scale: 0.97 }}
-          className="cursor-hover mt-2 inline-flex items-center justify-center gap-2 bg-surface-container-highest hover:bg-primary hover:text-on-primary text-tertiary font-label text-[10px] uppercase tracking-widest py-3 rounded-lg transition-colors"
-        >
-          <GitHubIcon />
-          View on GitHub
-        </motion.a>
+        <div className="flex flex-col sm:flex-row gap-2 mt-2">
+          <motion.a
+            href={item.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            whileHover={{ scale: 1.04 }}
+            whileTap={{ scale: 0.97 }}
+            className="cursor-hover flex-1 inline-flex items-center justify-center gap-2 bg-surface-container-highest hover:bg-primary hover:text-on-primary text-tertiary font-label text-[10px] uppercase tracking-widest py-3 rounded-lg transition-colors"
+          >
+            <GitHubIcon />
+            View on GitHub
+          </motion.a>
+          {item.award && (
+            <motion.button
+              type="button"
+              onClick={() => onAwardClick(item.award!, item.title)}
+              whileHover={{ scale: 1.04 }}
+              whileTap={{ scale: 0.97 }}
+              className="cursor-hover flex-1 inline-flex items-center justify-center gap-2 bg-primary text-on-primary hover:shadow-[0_0_20px_rgba(245,150,99,0.4)] font-label text-[10px] uppercase tracking-widest py-3 rounded-lg transition-shadow"
+            >
+              <TrophyIcon />
+              View Award
+            </motion.button>
+          )}
+        </div>
       </div>
     </motion.div>
   );
 }
 
+function AwardModal({
+  src,
+  title,
+  onClose,
+}: {
+  src: string;
+  title: string;
+  onClose: () => void;
+}) {
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+    };
+    window.addEventListener("keydown", onKey);
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      document.body.style.overflow = prevOverflow;
+    };
+  }, [onClose]);
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.25 }}
+      onClick={onClose}
+      className="fixed inset-0 z-[1000] bg-black/85 backdrop-blur-md flex items-center justify-center p-6"
+    >
+      <motion.div
+        initial={{ scale: 0.9, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        exit={{ scale: 0.95, opacity: 0 }}
+        transition={{ type: "spring", stiffness: 260, damping: 26 }}
+        onClick={(e) => e.stopPropagation()}
+        className="relative max-w-4xl w-full"
+      >
+        <button
+          type="button"
+          onClick={onClose}
+          aria-label="Close"
+          className="cursor-hover absolute -top-4 -right-4 w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center shadow-lg hover:scale-110 transition-transform z-10"
+        >
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="w-5 h-5">
+            <path d="M6 6l12 12M6 18L18 6" strokeLinecap="round" />
+          </svg>
+        </button>
+        <img
+          src={src}
+          alt={`${title} award`}
+          className="w-full h-auto rounded-xl shadow-2xl border border-outline-variant/20"
+        />
+        <p className="mt-4 text-center font-label text-[10px] uppercase tracking-[0.3em] text-on-surface-variant">
+          {title}
+        </p>
+      </motion.div>
+    </motion.div>
+  );
+}
+
 export default function Hackathons() {
+  const [award, setAward] = useState<{ src: string; title: string } | null>(null);
+
   return (
     <section className="py-24 px-6 md:px-20 bg-surface-container-low" id="hackathons">
       <motion.div
@@ -176,11 +270,24 @@ export default function Hackathons() {
                 visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
               }}
             >
-              <HackathonCard item={item} />
+              <HackathonCard
+                item={item}
+                onAwardClick={(src, title) => setAward({ src, title })}
+              />
             </motion.div>
           ))}
         </motion.div>
       </motion.div>
+
+      <AnimatePresence>
+        {award && (
+          <AwardModal
+            src={award.src}
+            title={award.title}
+            onClose={() => setAward(null)}
+          />
+        )}
+      </AnimatePresence>
     </section>
   );
 }
