@@ -1,6 +1,6 @@
 "use client";
 import { motion } from "framer-motion";
-import { useRef, useState, useEffect, MouseEvent } from "react";
+import { useRef, useState, useEffect, MouseEvent, CSSProperties } from "react";
 
 type Project = {
   title: string;
@@ -68,29 +68,40 @@ function GitHubIcon() {
 
 export function ProjectCard({ project }: { project: Project }) {
   const cardRef = useRef<HTMLDivElement>(null);
-  const [spot, setSpot] = useState({ x: -200, y: -200, active: false });
+  const rafRef = useRef<number | null>(null);
+  const latest = useRef({ x: 0, y: 0 });
 
   const handleMove = (e: MouseEvent<HTMLDivElement>) => {
     const rect = cardRef.current?.getBoundingClientRect();
     if (!rect) return;
-    setSpot({ x: e.clientX - rect.left, y: e.clientY - rect.top, active: true });
+    latest.current.x = e.clientX - rect.left;
+    latest.current.y = e.clientY - rect.top;
+    if (rafRef.current !== null) return;
+    rafRef.current = requestAnimationFrame(() => {
+      rafRef.current = null;
+      const el = cardRef.current;
+      if (!el) return;
+      el.style.setProperty("--spot-x", `${latest.current.x}px`);
+      el.style.setProperty("--spot-y", `${latest.current.y}px`);
+    });
+  };
+
+  const spotStyle: CSSProperties = {
+    background:
+      "radial-gradient(320px circle at var(--spot-x, -200px) var(--spot-y, -200px), rgba(245,150,99,0.18), transparent 60%)",
   };
 
   return (
     <motion.div
       ref={cardRef}
       onMouseMove={handleMove}
-      onMouseEnter={() => setSpot((s) => ({ ...s, active: true }))}
-      onMouseLeave={() => setSpot((s) => ({ ...s, active: false }))}
       whileHover={{ y: -6 }}
       transition={{ type: "spring", stiffness: 300, damping: 20 }}
-      className="cursor-hover relative glass-card rounded-xl overflow-hidden group snap-start shrink-0 w-[340px] md:w-[380px] flex flex-col"
+      className="cursor-hover relative glass-card rounded-xl overflow-hidden group snap-start shrink-0 w-[340px] md:w-[380px] flex flex-col will-change-transform"
     >
       <div
         className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-        style={{
-          background: `radial-gradient(320px circle at ${spot.x}px ${spot.y}px, rgba(245,150,99,0.18), transparent 60%)`,
-        }}
+        style={spotStyle}
       />
       <div className="p-8 space-y-4 flex-1 flex flex-col relative z-10">
         <span className="font-label text-[10px] uppercase tracking-widest text-primary">
