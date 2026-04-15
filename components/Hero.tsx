@@ -63,7 +63,8 @@ export default function Hero() {
         </motion.p>
 
         <div className="flex flex-wrap gap-4 pt-4">
-          <motion.button 
+          <motion.a
+            href="#projects"
             className="cursor-hover bg-primary text-on-primary px-8 py-4 rounded-xl font-bold transition-all flex items-center gap-3"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -72,8 +73,9 @@ export default function Hero() {
             whileTap={{ scale: 0.97 }}
           >
             My work
-          </motion.button>
-          <motion.button 
+          </motion.a>
+          <motion.a
+            href="#connect"
             className="cursor-hover bg-surface-variant/40 backdrop-blur-md border border-outline-variant/20 px-8 py-4 rounded-xl font-bold text-tertiary transition-all"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -82,7 +84,7 @@ export default function Hero() {
             whileTap={{ scale: 0.97 }}
           >
             Connect with me
-          </motion.button>
+          </motion.a>
         </div>
       </motion.div>
     </section>
