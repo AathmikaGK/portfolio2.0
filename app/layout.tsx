@@ -3,7 +3,6 @@ import SmoothScroll from "@/components/SmoothScroll";
 import CustomCursor from "@/components/CustomCursor";
 import AmbientOrbs from "@/components/AmbientOrbs";
 import ThemeToggle from "@/components/ThemeToggle";
-import IntroSplash from "@/components/IntroSplash";
 
 export const metadata = {
   title: "Aathmika | Software Engineer Portfolio",
@@ -36,7 +35,6 @@ export default function RootLayout({
       </head>
       <body suppressHydrationWarning className="selection:bg-primary-container selection:text-on-primary-container bg-background text-on-background">
         <div className="grain-overlay"></div>
-        <IntroSplash />
         <SmoothScroll>
           <CustomCursor />
           <AmbientOrbs />
