@@ -10,9 +10,9 @@ import Contact from "@/components/Contact";
 
 export default function Home() {
   return (
-    <div className="flex min-h-[1024px]">
+    <div className="min-h-[1024px]">
       <Sidebar />
-      <main className="flex-1 md:ml-64 w-full">
+      <main className="md:ml-64">
         {/* Mobile TopAppBar */}
         <nav className="bg-surface-container-lowest/80 backdrop-blur-xl text-primary font-bold tracking-tighter uppercase Inter docked full-width top-0 z-50 md:hidden border-b border-outline-variant/30 flex justify-between items-center px-6 py-4 w-full transition-colors duration-300">
           <span className="text-lg font-black tracking-widest text-tertiary">Aathmika</span>
