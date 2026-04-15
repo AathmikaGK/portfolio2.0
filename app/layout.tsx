@@ -4,8 +4,8 @@ import CustomCursor from "@/components/CustomCursor";
 import AmbientOrbs from "@/components/AmbientOrbs";
 
 export const metadata = {
-  title: "ALCHEMIST.IO | Software Artisan Portfolio",
-  description: "Software Artisan Portfolio",
+  title: "Aathmika | Software Engineer Portfolio",
+  description: "Software Engineer Portfolio",
 };
 
 export default function RootLayout({
