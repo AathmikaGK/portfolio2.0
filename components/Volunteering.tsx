@@ -5,14 +5,14 @@ export default function Volunteering() {
   const cards = [
     {
       img: "/volunteering/qut-connect.png",
-      title: "QUT Connector",
-      desc: "Mentoring underprivileged youth in basic Python and web development fundamentals.",
+      title: "Event Facilitator, QUT Connect",
+      desc: "Ran QUT 101 orientation for incoming students. Walked a full cohort through university systems and answered questions to help them settle in confidently.",
       startX: -50
     },
     {
       img: "/volunteering/qut-guild.png",
-      title: "QUT Guild Volunteer",
-      desc: "Building open-source sensors for local parks to monitor soil moisture and health via IoT.",
+      title: "Volunteer, QUT Guild",
+      desc: "Organised Welcome Week activities helping new students connect and feel at ease during their first days on campus.",
       startX: 50
     }
   ];
