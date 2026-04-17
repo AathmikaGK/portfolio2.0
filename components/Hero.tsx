@@ -2,12 +2,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-const socialLinks = [
-  { label: "LinkedIn", href: "https://www.linkedin.com/in/aathmika-gokula-krishna/" },
-  { label: "GitHub", href: "https://github.com/AathmikaGK" },
-  { label: "Email", href: "mailto:aathmikagokulakrishna@gmail.com" },
-];
-
 export default function Hero() {
   const [taglineText, setTaglineText] = useState("");
   const [wordIndex, setWordIndex] = useState(0);
@@ -69,18 +63,6 @@ export default function Hero() {
             </motion.span>
           </AnimatePresence>
         </div>
-
-        <motion.div className="flex gap-3 flex-wrap" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }}>
-          {socialLinks.map((item) => (
-            <a
-              key={item.label}
-              href={item.href}
-              className="cursor-hover px-4 py-2 rounded-full text-xs uppercase tracking-widest bg-surface-container-highest hover:bg-primary hover:text-on-primary transition-colors"
-            >
-              {item.label}
-            </a>
-          ))}
-        </motion.div>
 
         <motion.p className="text-xl md:text-2xl text-on-surface-variant font-light leading-relaxed max-w-2xl min-h-[4rem]">
           {taglineText}

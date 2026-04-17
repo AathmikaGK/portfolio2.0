@@ -105,11 +105,12 @@ export default function Contact() {
                 {item.svg}
               </motion.a>
             ))}
-          </motion.div>
-
-          <div className="space-y-4">
-            <p className="text-sm text-on-surface-variant">Suggested custom domain: <span className="text-primary font-semibold">aathmika.dev</span> (or aathmikaai.dev)</p>
-            <button
+            <motion.button
+              type="button"
+              aria-label="Share website"
+              variants={socialVariants}
+              whileHover={{ scale: 1.2 }}
+              transition={{ type: "spring", stiffness: 400, damping: 15 }}
               onClick={async () => {
                 const url = window.location.href;
                 if (navigator.share) {
@@ -119,11 +120,16 @@ export default function Contact() {
                   alert("Website link copied to clipboard.");
                 }
               }}
-              className="cursor-hover px-5 py-3 rounded-xl border border-outline-variant/30 hover:border-primary text-tertiary font-semibold"
+              className="cursor-hover w-14 h-14 glass-card rounded-full flex items-center justify-center text-tertiary hover:text-primary transition-all duration-300"
             >
-              Share Website
-            </button>
-          </div>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="w-6 h-6" aria-hidden="true">
+                <path d="M15 8a3 3 0 1 0-2.83-4" strokeLinecap="round" strokeLinejoin="round" />
+                <path d="M6 13a3 3 0 1 0 2.83 4" strokeLinecap="round" strokeLinejoin="round" />
+                <path d="M8.59 11.51l6.82-3.02" strokeLinecap="round" strokeLinejoin="round" />
+                <path d="M8.59 12.49l6.82 3.02" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </motion.button>
+          </motion.div>
 
         </div>
 

@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 const categories = [
   {
     label: "Programming Languages",
-    skills: ["Python", "Java", "TypeScript", "C#", "R"],
+    skills: ["Python", "Java", "JavaScript", "TypeScript", "C#", "R"],
   },
   {
     label: "Web Development",
@@ -26,7 +26,7 @@ export default function TechStack() {
       <motion.div className="max-w-7xl mx-auto" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
         <div className="mb-16">
           <h2 className="text-xs font-label text-secondary uppercase tracking-[0.5em] mb-4">Tech</h2>
-          <h3 className="text-4xl font-bold text-tertiary tracking-tight">Tech Stack by Category</h3>
+          <h3 className="text-4xl font-bold text-tertiary tracking-tight">My Tech Stack</h3>
         </div>
 
         <div className="grid md:grid-cols-2 gap-8">
