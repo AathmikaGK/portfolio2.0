@@ -51,7 +51,7 @@ export default function Contact() {
             transition={{ duration: 0.5 }}
           >
             <h2 className="text-xs font-label text-primary uppercase tracking-[0.5em] mb-4"><br/></h2>
-            <h3 className="text-4xl font-bold text-tertiary tracking-tight">Let's Connect</h3>
+            <h3 className="text-5xl md:text-6xl font-bold text-tertiary tracking-tight">Let's Connect</h3>
             <p className="mt-4 text-on-surface-variant leading-relaxed">Always happy to connect, whether it’s for collaboration, a technical discussion, or simply to exchange ideas.</p>
           </motion.div>
 
@@ -106,6 +106,25 @@ export default function Contact() {
               </motion.a>
             ))}
           </motion.div>
+
+          <div className="space-y-4">
+            <p className="text-sm text-on-surface-variant">Suggested custom domain: <span className="text-primary font-semibold">aathmika.dev</span> (or aathmikaai.dev)</p>
+            <button
+              onClick={async () => {
+                const url = window.location.href;
+                if (navigator.share) {
+                  await navigator.share({ title: "Aathmika Portfolio", text: "Check out my portfolio", url });
+                } else {
+                  await navigator.clipboard.writeText(url);
+                  alert("Website link copied to clipboard.");
+                }
+              }}
+              className="cursor-hover px-5 py-3 rounded-xl border border-outline-variant/30 hover:border-primary text-tertiary font-semibold"
+            >
+              Share Website
+            </button>
+          </div>
+
         </div>
 
         <div className="glass-card p-10 rounded-2xl relative space-y-6">

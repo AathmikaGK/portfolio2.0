@@ -10,12 +10,10 @@ export default function Sidebar() {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveSection(entry.target.id);
-          }
+          if (entry.isIntersecting) setActiveSection(entry.target.id);
         });
       },
-      { threshold: 0.4 }
+      { threshold: 0.35 }
     );
 
     sections.forEach((s) => observer.observe(s));
@@ -23,67 +21,45 @@ export default function Sidebar() {
   }, []);
 
   const navLinks = [
-    { id: "home", href: "#home", label: "ABOUT ME" },
-    { id: "projects", href: "#projects", label: "MY WORK" },
-    { id: "hackathons", href: "#hackathons", label: "HACKATHONS" },
-    { id: "volunteering", href: "#volunteering", label: "VOLUNTEERING" },
-    { id: "connect", href: "#connect", label: "CONTACT ME" },
+    { id: "home", href: "#home", label: "About Me" },
+    { id: "tech", href: "#tech", label: "Tech Stack" },
+    { id: "projects", href: "#projects", label: "Projects" },
+    { id: "hackathons", href: "#hackathons", label: "Hackathons" },
+    { id: "experience", href: "#experience", label: "Experience" },
+    { id: "resume", href: "#resume", label: "Resume" },
+    { id: "connect", href: "#connect", label: "Contact" },
   ];
 
   return (
-    <aside className="bg-surface-container-lowest text-primary font-bold tracking-tight Inter fixed left-0 top-0 h-[1024px] w-64 hidden md:flex flex-col p-8 gap-8 border-r border-outline-variant/30 transition-colors duration-300">
-      <motion.div
-        className="flex items-center gap-3 cursor-hover"
-        initial={{ x: -30, opacity: 0 }}
-        animate={{ x: 0, opacity: 1 }}
-        transition={{ delay: 0.3, duration: 0.5 }}
-      >
-        <div>
-          <h2 className="text-tertiary font-black text-sm leading-tight">Aathmika Gokula Krishna</h2>
-          <p className="text-on-surface-variant text-[10px] uppercase tracking-widest">ASPIRING Software DEVELOPER</p>
-        </div>
-      </motion.div>
+    <aside className="text-primary font-bold tracking-tight Inter fixed left-6 top-6 bottom-6 w-64 hidden md:flex z-50">
+      <div className="w-full h-full bg-surface-container-lowest/85 backdrop-blur-xl rounded-2xl p-6 border border-outline-variant/30 shadow-[0_12px_30px_rgba(0,0,0,0.2)] flex flex-col gap-6">
+        <motion.div className="flex items-center gap-3 cursor-hover" initial={{ x: -30, opacity: 0 }} animate={{ x: 0, opacity: 1 }}>
+          <div>
+            <h2 className="text-tertiary font-black text-sm leading-tight">Aathmika Gokula Krishna</h2>
+            <p className="text-on-surface-variant text-[10px] uppercase tracking-widest">Aspiring Software Developer</p>
+          </div>
+        </motion.div>
 
-      <nav className="flex flex-col gap-2 mt-8">
-        {navLinks.map((link) => {
-          const isActive = activeSection === link.id;
-          return (
-            <motion.a
-              key={link.id}
-              href={link.href}
-              className={`relative flex items-center gap-4 py-3 px-4 rounded-xl font-bold transition-all duration-300 cursor-hover border-r-2 ${
-                isActive
-                  ? "text-tertiary border-primary"
-                  : "text-on-surface-variant hover:text-tertiary hover:bg-surface-container border-transparent"
-              }`}
-              animate={{ scale: isActive ? 1.05 : 1 }}
-              whileHover="hover"
-            >
-              {isActive && (
-                <motion.div
-                  layoutId="activeNav"
-                  className="absolute inset-0 bg-primary/20 rounded-xl pointer-events-none"
-                  transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                />
-              )}
-              <span className="font-label text-xs uppercase tracking-widest relative z-10 overflow-hidden">
+        <nav className="flex flex-col gap-1 mt-2">
+          {navLinks.map((link) => {
+            const isActive = activeSection === link.id;
+            return (
+              <a
+                key={link.id}
+                href={link.href}
+                className={`cursor-hover relative py-2.5 px-3 rounded-lg text-xs uppercase tracking-widest transition-all ${
+                  isActive ? "text-primary bg-primary/10" : "text-on-surface-variant hover:text-tertiary hover:bg-surface-container"
+                }`}
+              >
                 {link.label}
-                <motion.span
-                  className="absolute bottom-0 left-0 w-full h-[2px] bg-current"
-                  variants={{
-                    hover: { scaleX: 1, transition: { duration: 0.25 } }
-                  }}
-                  initial={{ scaleX: 0 }}
-                  style={{ transformOrigin: "left" }}
-                />
-              </span>
-            </motion.a>
-          );
-        })}
-      </nav>
+              </a>
+            );
+          })}
+        </nav>
 
-      <div className="mt-auto cursor-hover">
-        <p className="text-on-surface-variant/60 font-mono text-[10px] tracking-widest uppercase">v2.4.0</p>
+        <div className="mt-auto">
+          <p className="text-on-surface-variant/60 font-mono text-[10px] tracking-widest uppercase">floating nav</p>
+        </div>
       </div>
     </aside>
   );
