@@ -31,7 +31,6 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
-        <style>{`* { cursor: none !important; }`}</style>
       </head>
       <body suppressHydrationWarning className="selection:bg-primary-container selection:text-on-primary-container bg-background text-on-background">
         <div className="grain-overlay"></div>

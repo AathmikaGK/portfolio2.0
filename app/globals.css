@@ -62,7 +62,7 @@ body {
   color: rgb(var(--c-tertiary));
   font-family: "Inter", sans-serif;
   overflow-x: hidden;
-  min-height: max(884px, 100dvh);
+  min-height: 100dvh;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 .grain-overlay {
@@ -72,9 +72,10 @@ body {
   width: 100%;
   height: 100%;
   pointer-events: none;
-  z-index: 9999;
+  z-index: 20;
   opacity: var(--grain-opacity);
-  background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuC8EIudLria1XzugDBJPLflHNBvOHndR12pU7zQzRN5wuQE6Zt8LXJunyUWQ3mcZQbC3kB0rPackJqOetdBhhSmPmQWj2UmUWTbYIR1E5rQYJJw31U0IigsvDobVl6ETM8Zpo1sc98AiI1t-IHBaxOf1-r9CUnWZDze_NeWQLVNWckKmlMDYqvjisYJervHmExPlD3M2jkEqHWYLJ6ukfS1v9GEzFBOfgERVUc7-2nY6kAP6RD03ULgiZW-kLHcN63tGXvdKpHuAVI)
+  background-image: radial-gradient(rgba(255,255,255,0.08) 0.7px, transparent 0.7px);
+  background-size: 3px 3px;
 }
 .glow-orb {
   position: fixed;
@@ -100,4 +101,9 @@ body {
 ::-webkit-scrollbar-thumb {
   background: rgb(var(--scrollbar-thumb));
   border-radius: 10px
+}
+
+
+.custom-cursor-enabled, .custom-cursor-enabled * {
+  cursor: none !important;
 }

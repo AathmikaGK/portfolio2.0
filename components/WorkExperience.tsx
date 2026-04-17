@@ -90,7 +90,7 @@ export default function WorkExperience() {
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
-          <h2 className="text-xs font-label text-secondary uppercase tracking-[0.5em] mb-4">Chrono-Log // History</h2>
+          <h2 className="text-xs font-label text-secondary uppercase tracking-[0.5em] mb-4">Experience</h2>
           <h3 className="text-4xl font-bold text-tertiary tracking-tight">Work Experience</h3>
         </motion.div>
 

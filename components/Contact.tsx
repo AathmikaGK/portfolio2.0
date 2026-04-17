@@ -51,7 +51,7 @@ export default function Contact() {
             transition={{ duration: 0.5 }}
           >
             <h2 className="text-xs font-label text-primary uppercase tracking-[0.5em] mb-4"><br/></h2>
-            <h3 className="text-4xl font-bold text-tertiary tracking-tight">Let's Connect</h3>
+            <h3 className="text-5xl md:text-6xl font-bold text-tertiary tracking-tight">Let's Connect</h3>
             <p className="mt-4 text-on-surface-variant leading-relaxed">Always happy to connect, whether it’s for collaboration, a technical discussion, or simply to exchange ideas.</p>
           </motion.div>
 
@@ -105,7 +105,32 @@ export default function Contact() {
                 {item.svg}
               </motion.a>
             ))}
+            <motion.button
+              type="button"
+              aria-label="Share website"
+              variants={socialVariants}
+              whileHover={{ scale: 1.2 }}
+              transition={{ type: "spring", stiffness: 400, damping: 15 }}
+              onClick={async () => {
+                const url = window.location.href;
+                if (navigator.share) {
+                  await navigator.share({ title: "Aathmika Portfolio", text: "Check out my portfolio", url });
+                } else {
+                  await navigator.clipboard.writeText(url);
+                  alert("Website link copied to clipboard.");
+                }
+              }}
+              className="cursor-hover w-14 h-14 glass-card rounded-full flex items-center justify-center text-tertiary hover:text-primary transition-all duration-300"
+            >
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="w-6 h-6" aria-hidden="true">
+                <path d="M15 8a3 3 0 1 0-2.83-4" strokeLinecap="round" strokeLinejoin="round" />
+                <path d="M6 13a3 3 0 1 0 2.83 4" strokeLinecap="round" strokeLinejoin="round" />
+                <path d="M8.59 11.51l6.82-3.02" strokeLinecap="round" strokeLinejoin="round" />
+                <path d="M8.59 12.49l6.82 3.02" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </motion.button>
           </motion.div>
+
         </div>
 
         <div className="glass-card p-10 rounded-2xl relative space-y-6">
