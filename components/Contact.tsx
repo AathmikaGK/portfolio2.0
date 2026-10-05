@@ -4,23 +4,34 @@ import { motion, AnimatePresence } from "framer-motion";
 
 export default function Contact() {
   const [isLoading, setIsLoading] = useState(false);
-  const [showToast, setShowToast] = useState(false);
+  const [toast, setToast] = useState<{ type: "success" | "error"; message: string } | null>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsLoading(true);
-    setTimeout(() => {
-      setIsLoading(false);
-      setShowToast(true);
-    }, 1500); // Mock processing time
+    setToast(null);
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+    try {
+      const response = await fetch("/api/messages", {
+        method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name: formData.get("name"), email: formData.get("email"), message: formData.get("message"), website: formData.get("website") }),
+      });
+      const result = await response.json();
+      if (!response.ok) throw new Error(result.error || "Your message could not be sent.");
+      form.reset();
+      setToast({ type: "success", message: "Message sent! Thanks for reaching out." });
+    } catch (error) {
+      setToast({ type: "error", message: error instanceof Error ? error.message : "Your message could not be sent. Please try again." });
+    } finally { setIsLoading(false); }
   };
 
   useEffect(() => {
-    if (showToast) {
-      const timer = setTimeout(() => setShowToast(false), 4000);
+    if (toast) {
+      const timer = setTimeout(() => setToast(null), 5000);
       return () => clearTimeout(timer);
     }
-  }, [showToast]);
+  }, [toast]);
 
   const socialVariants = {
     hidden: { opacity: 0, scale: 0.8 },
@@ -118,17 +129,18 @@ export default function Contact() {
             transition={{ staggerChildren: 0.1 }}
           >
             <motion.div variants={fieldVariants} className="space-y-2">
-              <label className="font-label text-[10px] uppercase tracking-widest text-on-surface-variant"> Name</label>
-              <input style={InputFieldStyle} className="w-full bg-surface-container-low border-b border-outline-variant/20 focus:border-primary px-0 py-3 text-tertiary outline-none" placeholder="John Doe" type="text" required />
+              <label htmlFor="contact-name" className="font-label text-[10px] uppercase tracking-widest text-on-surface-variant"> Name</label>
+              <input id="contact-name" name="name" autoComplete="name" maxLength={120} style={InputFieldStyle} className="w-full bg-surface-container-low border-b border-outline-variant/20 focus:border-primary px-0 py-3 text-tertiary outline-none" placeholder="John Doe" type="text" required />
             </motion.div>
             <motion.div variants={fieldVariants} className="space-y-2">
-              <label className="font-label text-[10px] uppercase tracking-widest text-on-surface-variant">Email</label>
-              <input style={InputFieldStyle} className="w-full bg-surface-container-low border-b border-outline-variant/20 focus:border-primary px-0 py-3 text-tertiary outline-none" placeholder="john@protocol.io" type="email" required />
+              <label htmlFor="contact-email" className="font-label text-[10px] uppercase tracking-widest text-on-surface-variant">Email</label>
+              <input id="contact-email" name="email" autoComplete="email" maxLength={320} style={InputFieldStyle} className="w-full bg-surface-container-low border-b border-outline-variant/20 focus:border-primary px-0 py-3 text-tertiary outline-none" placeholder="john@protocol.io" type="email" required />
             </motion.div>
             <motion.div variants={fieldVariants} className="space-y-2">
-              <label className="font-label text-[10px] uppercase tracking-widest text-on-surface-variant">Message </label>
-              <textarea style={InputFieldStyle} className="w-full bg-surface-container-low border-b border-outline-variant/20 focus:border-primary px-0 py-3 text-tertiary outline-none resize-none" placeholder="Speak your mind..." rows={3} required />
+              <label htmlFor="contact-message" className="font-label text-[10px] uppercase tracking-widest text-on-surface-variant">Message </label>
+              <textarea id="contact-message" name="message" maxLength={5000} style={InputFieldStyle} className="w-full bg-surface-container-low border-b border-outline-variant/20 focus:border-primary px-0 py-3 text-tertiary outline-none resize-none" placeholder="Speak your mind..." rows={3} required />
             </motion.div>
+            <div className="absolute left-[-10000px]" aria-hidden="true"><label htmlFor="contact-website">Leave this field empty</label><input id="contact-website" name="website" tabIndex={-1} autoComplete="off" /></div>
             <motion.button 
               type="submit"
               variants={fieldVariants}
@@ -146,16 +158,17 @@ export default function Contact() {
           </motion.form>
 
           <AnimatePresence>
-            {showToast && (
+            {toast && (
               <motion.div 
+                role={toast.type === "error" ? "alert" : "status"}
                 initial={{ y: 60, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 exit={{ y: 60, opacity: 0 }}
                 transition={{ type: "spring", stiffness: 300, damping: 25 }}
-                className="absolute left-10 right-10 bottom-6 flex items-center gap-3 bg-stone-900/90 backdrop-blur-md p-4 rounded-lg border border-primary/20 shadow-lg"
+                className={`absolute left-10 right-10 bottom-6 flex items-center gap-3 backdrop-blur-md p-4 rounded-lg border shadow-lg ${toast.type === "error" ? "bg-red-950/95 border-red-400/30" : "bg-stone-900/90 border-primary/20"}`}
               >
-                <span className="material-symbols-outlined text-primary text-sm" data-icon="check_circle">check_circle</span>
-                <span className="text-[10px] font-label uppercase tracking-wider text-on-surface-variant">Message sent! I'll be in touch 🙌</span>
+                <span className={`material-symbols-outlined text-sm ${toast.type === "error" ? "text-red-300" : "text-primary"}`} aria-hidden="true">{toast.type === "error" ? "error" : "check_circle"}</span>
+                <span className="text-xs text-white">{toast.message}</span>
               </motion.div>
             )}
           </AnimatePresence>

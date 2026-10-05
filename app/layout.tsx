@@ -12,13 +12,13 @@ export const metadata = {
 const themeInitScript = `
 try {
   var t = localStorage.getItem('theme');
-  if (t === 'light') {
-    document.documentElement.classList.remove('dark');
-  } else {
+  if (t === 'dark') {
     document.documentElement.classList.add('dark');
+  } else {
+    document.documentElement.classList.remove('dark');
   }
 } catch (e) {
-  document.documentElement.classList.add('dark');
+  document.documentElement.classList.remove('dark');
 }
 `;
 
@@ -31,7 +31,6 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
-        <style>{`* { cursor: none !important; }`}</style>
       </head>
       <body suppressHydrationWarning className="selection:bg-primary-container selection:text-on-primary-container bg-background text-on-background">
         <div className="grain-overlay"></div>

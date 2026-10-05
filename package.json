@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@gsap/react": "latest",
+    "@supabase/supabase-js": "^2.117.2",
     "framer-motion": "latest",
     "gsap": "latest",
     "lenis": "latest",

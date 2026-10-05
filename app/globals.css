@@ -65,6 +65,9 @@ body {
   min-height: max(884px, 100dvh);
   transition: background-color 0.3s ease, color 0.3s ease;
 }
+*, *::before, *::after {
+  cursor: auto;
+}
 .grain-overlay {
   position: fixed;
   top: 0;
